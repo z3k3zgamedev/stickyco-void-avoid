@@ -1,0 +1,26 @@
+local data = require "main.data"
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+
+	sound.stop("main:/music#inGame")
+	sound.play("main:/music#interlude")
+end
+
+local function startgame(self)
+	data.startGame()
+	msg.post("main:/scenes", "show_game")
+	
+	sound.stop("main:/music#interlude")
+	sound.play("main:/music#inGame")
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("action") or action_id == hash("touch") then
+		if action.pressed then
+			startgame(self)
+		end
+	elseif action_id == hash("exit") and action.pressed then
+		msg.post("@system:", "exit", {code = 0})
+	end
+end
