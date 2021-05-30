@@ -1,0 +1,12 @@
+local data = require "main.data"
+
+function init(self)
+	particlefx.play("#particles")
+end
+
+function update(self, dt)
+	-- Calculate direction vector from the angle.
+	local position = go.get_position()
+	position.x = position.x - (data.SECTION_SPEED_MULTIPLIER * data.speed * dt)
+	go.set_position(position)
+end

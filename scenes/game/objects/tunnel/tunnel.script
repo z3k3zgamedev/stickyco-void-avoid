@@ -1,0 +1,26 @@
+local data = require "main.data"
+
+go.property("width", 1)
+go.property("ring_texture", resource.texture("/assets/textures/ring_blue.png"))
+go.property("tunnel_texture", resource.texture("/assets/textures/tunnel_blue.png"))
+
+function init(self)
+	local resource = resource.load("/assets/textures/ring_pink.texturec")
+	print(resource_path)
+	
+	go.set("#ring", "texture0", resource)
+	go.set("#tunnel", "texture0", self.tunnel_texture)
+end
+
+function update(self, dt)
+	-- Calculate direction vector from the angle.
+	local position = go.get_position()
+	position.x = position.x - (data.TUNNEL_SPEED_MULTIPLIER * data.speed * dt)
+	go.set_position(position)
+
+	-- If outside of the play area - delete.
+	if position.x < -self.width * 1.5 then
+		position.x = position.x + (self.width*3)
+		go.set_position(position)
+	end
+end

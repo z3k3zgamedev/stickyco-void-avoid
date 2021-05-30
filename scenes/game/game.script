@@ -1,0 +1,65 @@
+local data = require "main.data"
+local messages = require "main.messages"
+
+local UPDATE_SCORE = messages.UPDATE_SCORE
+local COLLECT_ORB = messages.COLLECT_ORB
+local GAME_OVER = messages.GAME_OVER
+local LAYOUT_CHANGED = messages.LAYOUT_CHANGED
+local MODE_LANDSCAPE = messages.MODE_LANDSCAPE
+local MODE_PORTRAIT = messages.MODE_PORTRAIT
+
+local LANDSCAPE_ROTATION = vmath.quat()
+local PORTRAIT_ROTATION = vmath.quat_rotation_z(-math.pi * .5)
+
+go.property("pointsPerSecond", 20)
+go.property("orbPoints", 200)
+
+local current_level_duration = 0
+
+local function collectOrb(id, self)
+	go.delete(id)
+	data.updateScore(self.orbPoints)
+end
+
+local function next_level()
+	data.reset_level_duration()
+	data.next_level()
+	current_level_duration = data.get_level_duration()
+end
+
+function init(self)
+	local width, height = window.get_size()
+
+	if (width > height) then
+		go.set_rotation(LANDSCAPE_ROTATION, "camera")
+	else 
+		go.set_rotation(PORTRAIT_ROTATION, "camera")
+	end
+
+	current_level_duration = data.get_level_duration()
+end
+
+function update(self, dt)
+	if data.get_state() == data.STATE_WAIT then return end
+
+	data.updateScore(self.pointsPerSecond * dt)
+
+	local time_elapsed = data.update_time_elapsed(dt)
+	if time_elapsed > current_level_duration then
+		next_level()
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == COLLECT_ORB then
+		collectOrb(message.id, self)
+	elseif message_id == GAME_OVER then
+		msg.post("main:/scenes", GAME_OVER)
+	end
+
+	if message_id == MODE_LANDSCAPE then
+		go.set_rotation(LANDSCAPE_ROTATION, "camera")
+	elseif message_id == MODE_PORTRAIT then
+		go.set_rotation(PORTRAIT_ROTATION, "camera")
+	end
+end

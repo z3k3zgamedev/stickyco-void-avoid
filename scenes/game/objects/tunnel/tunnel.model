@@ -1,0 +1,7 @@
+mesh: "/assets/models/tunnel.dae"
+material: "/builtins/materials/model.material"
+textures: "/assets/textures/tunnel_blue.png"
+skeleton: ""
+animations: ""
+default_animation: ""
+name: "unnamed"

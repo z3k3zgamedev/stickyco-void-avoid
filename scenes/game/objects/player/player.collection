@@ -1,0 +1,22 @@
+name: "default"
+instances {
+  id: "player"
+  prototype: "/scenes/game/objects/player/player.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 35.0
+    y: 35.0
+    z: 35.0
+  }
+}
+scale_along_z: 0

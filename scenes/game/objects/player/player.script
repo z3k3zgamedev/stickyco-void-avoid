@@ -1,0 +1,285 @@
+local data = require "main.data"
+local messages = require "main.messages"
+local acidrain = require "particles.acidrain"
+
+local COLLECT_ORB = messages.COLLECT_ORB
+local GAME_OVER = messages.GAME_OVER
+local DO_JUMP = messages.DO_JUMP
+local REGISTER = messages.REGISTER
+local UNREGISTER = messages.UNREGISTER
+
+local JUMP_VELOCITY = 550
+local GRAVITY_VELOCITY = 1500
+local GRAVITY = 1000
+local HOME_X = -285
+local EDGE_Y = 250
+local LERP_RATE = .05
+local GRAVITY_UP = 1
+local GRAVITY_DOWN = -1
+local ON_GROUND = 0
+local IS_JUMPING = 1
+local CHANGE_GRAVITY = 2
+local NORMAL_Y_MINIMUM = .7
+local ZERO_VELOCITY = vmath.vector3()
+
+local INPUT_UP = messages.INPUT_UP
+local INPUT_DOWN = messages.INPUT_DOWN
+local INPUT_JUMP = messages.INPUT_JUMP
+local INPUT_GRAVIY = messages.INPUT_GRAVIY
+
+local COLLISION_RESPONSE = hash("collision_response")
+local COLLISION_POINT = hash("contact_point_response")
+local PLATFORM_GROUP = hash("platform")
+local ORB_GROUP = hash("orb")
+local ENEMIES_GROUP = hash("enemy")
+
+local state = ON_GROUND
+local gravityDirection = GRAVITY_DOWN
+local gravity = 0
+local groundY = 0
+local speed = data.speed
+
+local function draw_line(from, to)
+	msg.post("@render:", "draw_line", { start_point = from, end_point = to, color = vmath.vector4(1,0,0,1) })
+end
+
+local function update_ray_cast(self, position)
+	local from = go.get_position()
+	self.to = position
+
+	local result = physics.raycast(from, self.to, { PLATFORM_GROUP })
+	
+	if result then
+		-- draw_line(from, result.position)
+		return result.position
+	else
+		-- draw_line(from, self.to)
+		return self.to
+	end
+end
+
+-- control functions
+local function jumpLerp(self)
+	local position = go.get_position()
+	local to = update_ray_cast(self)
+	local newPosition = vmath.lerp(.3, position.y, to.y)
+	position.y = newPosition
+	go.set_position(position)
+end
+
+local function move(self)
+	local position = go.get_position()
+	if position.x < HOME_X then
+		local newPosition = vmath.lerp(LERP_RATE, position.x, HOME_X)
+		position.x = newPosition
+	end
+	go.set_position(position)
+end
+
+local function move_up(self)
+	if state == CHANGE_GRAVITY then
+		return
+	end
+	
+	if gravityDirection == GRAVITY_DOWN then
+		state = CHANGE_GRAVITY
+		gravityDirection = GRAVITY_UP
+		gravity.y = GRAVITY
+
+		self.velocity.y = self.velocity.y + (GRAVITY_VELOCITY * gravityDirection)
+	end
+end
+
+local function move_down(self)
+	if state == CHANGE_GRAVITY then	
+		return
+	end
+		
+	if gravityDirection == GRAVITY_UP then
+		state = CHANGE_GRAVITY
+		gravityDirection = GRAVITY_DOWN
+		gravity.y = -GRAVITY
+
+		self.velocity.y = self.velocity.y + (GRAVITY_VELOCITY * gravityDirection)
+	end
+end
+
+local function jump(self)
+	if state == ON_GROUND then
+		if state ~= IS_JUMPING then
+			state = IS_JUMPING
+			self.velocity.y = self.velocity.y + (JUMP_VELOCITY * -gravityDirection)
+			sound.play("main:/sounds#jump")
+		end
+	end
+end
+
+local function fall(self)
+	if gravityDirection == GRAVITY_DOWN then 
+		if self.velocity.y > 0 then
+			self.velocity.y = self.velocity.y * 0.5
+		end
+	elseif gravityDirection == GRAVITY_UP then 
+		if self.velocity.y < 0 then
+			self.velocity.y = self.velocity.y * 0.5
+		end
+	end
+end
+
+local function switch_gravity(self)
+	if gravityDirection == GRAVITY_DOWN then move_up(self)
+	elseif gravityDirection == GRAVITY_UP then move_down(self)
+	end
+end
+
+-- collision solver
+local function is_player_on_ground(self, normal, distance)
+	if distance > 0 then
+		local projection = vmath.project(self.correction, normal * distance)
+		if projection < 1 then
+			-- Only care for projections that does not overshoot.
+			local comp = (distance - distance * projection) * normal
+			-- Apply compensation
+			go.set_position(go.get_position() + comp)
+			-- Accumulate correction done
+			self.correction = self.correction + comp
+		end
+	end
+
+	-- horizontal collision
+	if math.abs(normal.x) > 0.7 then
+		self.velocity.x = 0
+	end
+
+	-- collide with ground
+	if normal.y > NORMAL_Y_MINIMUM then
+		state = ON_GROUND
+		self.velocity.y = 0
+	end
+
+	-- collide with ceiling
+	if normal.y < -NORMAL_Y_MINIMUM then
+		state = ON_GROUND
+		self.velocity.y = 0
+	end
+end
+
+local function collect_orb(id)
+	sound.play("main:/sounds#collect")
+	msg.post("/scripts#game", COLLECT_ORB, { id = id })
+end
+
+local function show_gameOver(self)
+	msg.post("/scripts#game", GAME_OVER)
+end
+
+local function die(self)
+	msg.post(".", "disable")
+	particlefx.stop("#dust")
+	-- self.emitter.start()
+	particlefx.play("#explosion")
+	
+	data.set_state(data.STATE_WAIT)
+	sound.play("main:/sounds#gameOver")
+	timer.delay(1.5, true, show_gameOver)
+end
+
+local function init_explosion(self)	
+	local emitter = acidrain.create({
+		factory = {
+			url = "#explosionFactory",
+			sprite_id = "particle",
+		},
+		emitter = {
+			update_method = "physics",
+			type = "point",
+			width = 320,
+			height = 1,
+			max_particles = 1000
+		},
+		particle = {
+			color = {vmath.vector3(1, 1, 1)},
+			emit_delay = 0.025,
+			time_in = 0.25,
+			time_life = 2,
+			time_out = 0.25,
+			scale_in = vmath.vector3(0.25, 0.25, 0.25),
+		},
+		movement = {
+			type = "angle",
+			angle = {{250, 290}},
+			velocity = {180},
+			angle_increment = 4,
+			angle_bounce = true,
+		}
+	})
+	return emitter
+end
+
+-- built in functions
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	msg.post("/gui", REGISTER)
+	
+	gravity = physics.get_gravity()
+	self.correction = vmath.vector3()
+	self.velocity = vmath.vector3(0, 0, 0)
+	self.to = vmath.vector3()
+
+	-- local sprite_scale = vmath.vector3(.013)
+	-- go.set("#sprite", "scale", sprite_scale)
+
+	-- self.emitter = init_explosion(self)
+	particlefx.play("#dust")
+end
+
+function final(self)
+	msg.post("gui", UNREGISTER)
+end
+
+function update(self, dt)
+	-- if state == CHANGE_GRAVITY then
+	-- 	jumpLerp(self)
+	-- end
+
+	self.velocity.y = self.velocity.y + (GRAVITY * gravityDirection * dt)
+	
+	-- move player	
+	local pos = go.get_position()
+	pos = pos + self.velocity * dt
+	pos = update_ray_cast(self, pos)
+	
+	go.set_position(pos)
+
+	-- reset volatile state
+	self.correction = vmath.vector3()
+
+	move(self)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == COLLISION_POINT then
+		if message.group == PLATFORM_GROUP then
+			local normal = message.normal
+			local distance = message.distance
+			is_player_on_ground(self, normal, distance)
+		end
+	end
+
+	if message_id == COLLISION_RESPONSE then
+		if message.group == ORB_GROUP then collect_orb(message.other_id)
+		elseif message.group == ENEMIES_GROUP then die(self) end
+	end
+
+	if message_id == INPUT_UP and message.pressed then move_up(self)
+	elseif message_id == INPUT_DOWN and message.pressed then move_down(self) end
+	
+	if message_id == INPUT_GRAVIY and message.pressed then switch_gravity(self) end
+	
+	if message_id == INPUT_JUMP then
+		if message.pressed then jump(self)
+		elseif message.released then fall(self)
+		end
+	end
+end

@@ -1,0 +1,7 @@
+mesh: "/assets/models/enemy1.dae"
+material: "/builtins/materials/model.material"
+textures: "/assets/textures/Cone.png"
+skeleton: ""
+animations: ""
+default_animation: ""
+name: "unnamed"

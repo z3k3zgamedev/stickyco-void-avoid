@@ -1,0 +1,7 @@
+mesh: "/builtins/assets/meshes/sphere.dae"
+material: "/builtins/materials/model.material"
+textures: "/assets/textures/ring_white.png"
+skeleton: ""
+animations: ""
+default_animation: ""
+name: "unnamed"

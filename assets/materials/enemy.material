@@ -1,0 +1,4 @@
+name: "unnamed"
+vertex_program: "/assets/materials/enemy.vp"
+fragment_program: "/assets/materials/enemy.fp"
+vertex_space: VERTEX_SPACE_WORLD

@@ -1,0 +1,62 @@
+name: "default"
+instances {
+  id: "enemy1"
+  prototype: "/scenes/game/objects/enemies/enemy1.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 30.0
+    y: 30.0
+    z: 30.0
+  }
+}
+instances {
+  id: "enemy1_collision"
+  prototype: "/scenes/game/objects/enemies/enemy1_collision.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "portal"
+  prototype: "/scenes/game/objects/enemies/portal.go"
+  position {
+    x: 0.0
+    y: -49.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 40.0
+    y: 40.0
+    z: 40.0
+  }
+}
+scale_along_z: 0

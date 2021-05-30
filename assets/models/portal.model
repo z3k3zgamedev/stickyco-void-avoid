@@ -1,0 +1,7 @@
+mesh: "/assets/models/portal.dae"
+material: "/builtins/materials/model.material"
+textures: "/assets/textures/portal.png"
+skeleton: ""
+animations: ""
+default_animation: ""
+name: "unnamed"

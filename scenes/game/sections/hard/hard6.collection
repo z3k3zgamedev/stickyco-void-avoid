@@ -1,0 +1,542 @@
+name: "default"
+collection_instances {
+  id: "orb3"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: -580.0
+    y: -180.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb4"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: -640.0
+    y: -180.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb5"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: -700.0
+    y: -180.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: -240.0
+    y: -170.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb1"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: -180.0
+    y: -170.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb2"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: -120.0
+    y: -170.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb6"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: 660.0
+    y: 180.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb7"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: 720.0
+    y: 180.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb8"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: 780.0
+    y: 180.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb9"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: -340.0
+    y: -70.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb10"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: 0.0
+    y: -70.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb11"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: 340.0
+    y: -70.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platformTop"
+  collection: "/scenes/game/objects/edge/platform30.collection"
+  position {
+    x: -700.0
+    y: 220.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platformBottom"
+  collection: "/scenes/game/objects/edge/platform30.collection"
+  position {
+    x: -700.0
+    y: -220.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platform"
+  collection: "/scenes/game/objects/platform/platform10.collection"
+  position {
+    x: -180.0
+    y: -200.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platformTop1"
+  collection: "/scenes/game/objects/edge/platform30.collection"
+  position {
+    x: 700.0
+    y: 220.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platformBottom1"
+  collection: "/scenes/game/objects/edge/platform30.collection"
+  position {
+    x: 700.0
+    y: -220.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platform1"
+  collection: "/scenes/game/objects/platform/platform10.collection"
+  position {
+    x: 180.0
+    y: -200.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platform2"
+  collection: "/scenes/game/objects/platform/platform10.collection"
+  position {
+    x: 0.0
+    y: 130.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb12"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: 120.0
+    y: -170.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb13"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: 180.0
+    y: -170.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "orb14"
+  collection: "/scenes/game/objects/orb/orb.collection"
+  position {
+    x: 240.0
+    y: -170.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "enemy4"
+  collection: "/scenes/game/objects/enemies/enemy2.collection"
+  position {
+    x: 0.0
+    y: 70.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platform_edge"
+  collection: "/scenes/game/objects/edge/platform_edge.collection"
+  position {
+    x: -405.0
+    y: 199.9
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platform_edge1"
+  collection: "/scenes/game/objects/edge/platform_edge.collection"
+  position {
+    x: 405.0
+    y: 199.9
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platform_edge2"
+  collection: "/scenes/game/objects/edge/platform_edge.collection"
+  position {
+    x: -405.0
+    y: -199.9
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platform_edge3"
+  collection: "/scenes/game/objects/edge/platform_edge.collection"
+  position {
+    x: 405.0
+    y: -199.9
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0

@@ -1,0 +1,160 @@
+local data = require "main.data"
+local messages = require "main.messages"
+
+local UPDATE_SCORE = messages.UPDATE_SCORE
+local LAYOUT_CHANGED = messages.LAYOUT_CHANGED
+local MODE_LANDSCAPE = messages.MODE_LANDSCAPE
+local MODE_PORTRAIT = messages.MODE_PORTRAIT
+local WINDOW_RESIZED = messages.WINDOW_RESIZED
+
+local INPUT_UP = messages.INPUT_UP
+local INPUT_DOWN = messages.INPUT_DOWN
+local INPUT_JUMP = messages.INPUT_JUMP
+local INPUT_GRAVIY = messages.INPUT_GRAVIY
+
+local REGISTER = messages.REGISTER
+local UNREGISTER = messages.UNREGISTER
+
+local btn_gravity
+local btn_jump
+local countdown_counter = 5
+local countdown_status = {"GO!","1","2","3", "Ready"}
+
+local function countdown(self, handle, time_elapsed)
+	local text_status = gui.get_node("text_status")
+	countdown_counter = countdown_counter - 1
+
+	if countdown_counter > 0 then
+		gui.set_text(text_status, countdown_status[countdown_counter])
+	else
+		data.set_state(data.STATE_PLAY)
+		gui.set_enabled(text_status, false)
+		timer.cancel(handle)
+	end
+end
+
+local function update_score()
+	local score = string.format("%07d", math.floor(data.getScore()))
+	local newScore = ""
+	for w in string.gmatch(score, "%d") do
+		newScore = newScore .. w .. " "
+	end
+
+	local text_score_landscape = gui.get_node("text_score_landscape")
+	local text_score_portrait = gui.get_node("text_score_portrait")
+
+	gui.set_text(text_score_landscape, newScore)
+	gui.set_text(text_score_portrait, newScore)
+end
+
+-- listener functions
+local function register(self, node, fn)
+	assert(node, "You must provide a node")
+	assert(fn, "You must provide a function")
+	if not self.controls then self.controls = {} end
+	self.controls[node] = {
+		node_start_position = gui.get_position(node),
+		node = node,
+		pressed = false,
+		fn = fn,
+	}
+end
+
+local function post_to_listener(self, message_id, message)
+	if self.listener then
+		msg.post(self.listener, message_id, message or {})
+	end
+end
+-- built in functions
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+
+	timer.delay(1, true, countdown)
+		
+	btn_gravity = gui.get_node("btn_gravity")
+	btn_jump = gui.get_node("btn_jump")
+	
+	local showTouchButtons = true
+	
+	if html5 then
+		showTouchButtons = html5.run("hasTouchScreen();") == "true"
+	else
+		showTouchButtons = false
+	end
+
+	if showTouchButtons == false then
+		gui.set_enabled(btn_gravity, false)
+		gui.set_enabled(btn_jump, false)
+	end
+end
+
+function final(self)
+	msg.post(".", "release_input_focus")
+end
+
+function update(self, dt)
+	update_score()
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == REGISTER then
+		self.listener = sender
+	elseif message_id == UNREGISTER then
+		self.listener = nil
+	end
+	
+	if message_id == UPDATE_SCORE then
+		update_score()
+	end
+
+	if message_id == LAYOUT_CHANGED then
+		if message.id == MODE_LANDSCAPE then
+			msg.post("/scripts#game", MODE_LANDSCAPE)
+		elseif message.id == MODE_PORTRAIT then
+			msg.post("/scripts#game", MODE_PORTRAIT)
+		end
+
+		update_score()
+	end
+end
+
+
+function on_input(self, action_id, action)
+	if data.get_state() == data.STATE_WAIT then return end
+	
+	if action_id == hash("touch") then
+		local btn_gravity = gui.get_node("btn_gravity")
+		local btn_jump = gui.get_node("btn_jump")
+		
+		if gui.pick_node(btn_gravity, action.x, action.y) then
+			if action.pressed then
+				post_to_listener(self, INPUT_GRAVIY, { pressed = true })
+			end			
+		end
+
+		if gui.pick_node(btn_jump, action.x, action.y) then			
+			if action.pressed then
+				post_to_listener(self, INPUT_JUMP, { pressed = true })
+			elseif action.released then
+				post_to_listener(self, INPUT_JUMP, { released = true })
+			end
+		end
+	end
+
+	if action_id == INPUT_UP then
+		if action.pressed then
+			post_to_listener(self, INPUT_UP, { pressed = true })
+		end
+	elseif action_id == INPUT_DOWN then
+		if action.pressed then
+			post_to_listener(self, INPUT_DOWN, { pressed = true })
+		end
+	elseif action_id == INPUT_JUMP then
+		if action.pressed then
+			post_to_listener(self, INPUT_JUMP, { pressed = true })
+		elseif action.released then
+			post_to_listener(self, INPUT_JUMP, { released = true })
+		end
+	end
+end

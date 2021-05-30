@@ -1,18 +1,15 @@
 local data = require "main.data"
+local messages = require "main.messages"
+
+local SHOW_GAME = messages.SHOW_GAME
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-
-	sound.stop("main:/music#inGame")
-	sound.play("main:/music#interlude")
 end
 
 local function startgame(self)
 	data.startGame()
-	msg.post("main:/scenes", "show_game")
-	
-	sound.stop("main:/music#interlude")
-	sound.play("main:/music#inGame")
+	msg.post("main:/scenes", SHOW_GAME)
 end
 
 function on_input(self, action_id, action)

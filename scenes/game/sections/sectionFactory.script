@@ -1,0 +1,87 @@
+local data = require "main.data"
+local messages = require "main.messages"
+
+local START_X = 285
+local SECTION_WIDTH = 2000
+local LOADED = messages.PROXY_LOADED
+
+go.property("section", 1)
+go.property("startingSection", msg.url())
+
+local function get_random_section(self)
+	local current_sections = data.sections
+	local level_sections = data.LEVEL_SECTIONS[data.level]
+	local available_sections = {}
+
+	for index, value in ipairs(level_sections) do
+		local value_to_add = value
+		
+		for section_index, section_value in ipairs(current_sections) do
+			if value == section_value then
+				value_to_add = ''
+				break
+			end
+		end
+
+		if value_to_add ~= '' then
+			local available_total = table.getn(available_sections) + 1
+			available_sections[available_total] = value
+		end
+	end
+
+	local sections_total = table.getn(available_sections)
+	local random_section_index = math.random(sections_total)
+	local random_section = available_sections[random_section_index]
+
+	current_sections[self.section] = random_section
+
+	return random_section
+end
+
+local function load_section(self, section_name)
+	local position = go.get_position()
+	self.section_id = collectionfactory.create(section_name, position)
+end
+
+local function reset_section(self)
+	local position = go.get_position()
+	position.x = position.x + (SECTION_WIDTH * 3)
+	go.set_position(position)
+	go.delete(self.section_id)
+
+	data.sections[self.section] = ''
+
+	local random_section = get_random_section(self)
+	load_section(self, msg.url("/sections#"..random_section))
+end
+
+function init(self)
+	local delay = 0
+	
+	if self.startingSection == msg.url("/sections") then
+		delayLoading = 2
+		local random_section = get_random_section(self)
+		self.startingSection = msg.url("/sections#"..random_section)
+	end
+
+	load_section(self, self.startingSection)
+end
+
+function update(self, dt)
+	-- Calculate direction vector from the angle.
+	local position = go.get_position()
+	position.x = position.x - (data.SECTION_SPEED_MULTIPLIER * data.speed * dt)
+	go.set_position(position)
+
+	-- If outside of the play area - delete.
+	if position.x < START_X - SECTION_WIDTH then
+		reset_section(self)
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == LOADED then
+		msg.post(sender, "init")
+		msg.post(sender, "enable")
+	end
+end

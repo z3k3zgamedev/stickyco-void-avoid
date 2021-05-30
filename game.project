@@ -1,8 +1,11 @@
 [project]
 title = Void Avoid
+dependencies#0 = https://github.com/rgrams/rendercam/archive/1.0.3.zip
+dependencies#1 = https://github.com/indiesoftby/defold-hyper-trails/archive/master.zip
 
 [bootstrap]
 main_collection = /main/main.collectionc
+render = /main/render/rendercam.renderc
 
 [input]
 game_binding = /input/game.input_bindingc
@@ -11,6 +14,9 @@ use_accelerometer = 0
 [display]
 width = 1920
 height = 1080
+fullscreen = 0
+display_profiles = /main/render/default.display_profilesc
+high_dpi = 0
 
 [ios]
 app_icon_120x120 = /assets/app_icons/icon_120.png
@@ -42,4 +48,20 @@ shared_state = 1
 [physics]
 gravity_y = -1000.0
 scale = 0.01
+type = 3D
+debug = 0
+
+[html5]
+splash_image = /assets/images/sticky_logo.png
+htmlfile = /builtins/manifests/web/engine_template.html
+cssfile = /web/dark_theme.css
+show_fullscreen_button = 0
+show_made_with_defold = 0
+scale_mode = stretch
+
+[model]
+max_count = 256
+
+[graphics]
+texture_profiles = /assets/textures/default.texture_profiles
 

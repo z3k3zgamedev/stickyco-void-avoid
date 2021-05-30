@@ -160,7 +160,7 @@ embedded_instances {
   data: "embedded_components {\n"
   "  id: \"collect\"\n"
   "  type: \"sound\"\n"
-  "  data: \"sound: \\\"/assets/audio/sfx/collect.wav\\\"\\n"
+  "  data: \"sound: \\\"/assets/audio/sfx/collect.ogg\\\"\\n"
   "looping: 0\\n"
   "group: \\\"master\\\"\\n"
   "gain: 1.0\\n"
@@ -183,7 +183,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"gameOver\"\n"
   "  type: \"sound\"\n"
-  "  data: \"sound: \\\"/assets/audio/sfx/gameOver.wav\\\"\\n"
+  "  data: \"sound: \\\"/assets/audio/sfx/gameOver.ogg\\\"\\n"
   "looping: 0\\n"
   "group: \\\"master\\\"\\n"
   "gain: 1.0\\n"
@@ -206,7 +206,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"incorrect\"\n"
   "  type: \"sound\"\n"
-  "  data: \"sound: \\\"/assets/audio/sfx/incorrect.wav\\\"\\n"
+  "  data: \"sound: \\\"/assets/audio/sfx/incorrect.ogg\\\"\\n"
   "looping: 0\\n"
   "group: \\\"master\\\"\\n"
   "gain: 1.0\\n"
@@ -229,7 +229,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"jump\"\n"
   "  type: \"sound\"\n"
-  "  data: \"sound: \\\"/assets/audio/sfx/jump.wav\\\"\\n"
+  "  data: \"sound: \\\"/assets/audio/sfx/jump.ogg\\\"\\n"
   "looping: 0\\n"
   "group: \\\"master\\\"\\n"
   "gain: 1.0\\n"
@@ -250,26 +250,6 @@ embedded_instances {
   "  }\n"
   "}\n"
   ""
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-embedded_instances {
-  id: "menu"
-  data: ""
   position {
     x: 0.0
     y: 0.0

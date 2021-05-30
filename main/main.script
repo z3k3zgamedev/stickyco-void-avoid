@@ -1,4 +1,14 @@
 local data = require "main.data"
+local messages = require "main.messages"
+
+local SHOW_GAME = messages.SHOW_GAME
+local SHOW_MENU = messages.SHOW_MENU
+local GAME_OVER = messages.GAME_OVER
+local UNLOAD_GAME_OVER = messages.UNLOAD_GAME_OVER
+local PROXY_LOADED = messages.PROXY_LOADED
+
+local current_scene = "scenes#menu"
+local current_music = "music#interlude"
 
 local function domaincheck()
 	local v = true
@@ -10,21 +20,35 @@ local function domaincheck()
 	return v
 end
 
+local function gotoScene(scene)
+	msg.post(current_scene, "unload")
+	current_scene = scene
+	msg.post(current_scene, "load")
+end
+
+local function playMusic(music)
+	sound.stop(current_music)
+	current_music = music
+	sound.play(current_music)
+end
+
 function init(self)
 	--if domaincheck() then msg.post(".", "acquire_input_focus") end
 	msg.post(".", "acquire_input_focus")
-	msg.post("scenes#menu", "load")
-	--msg.post("@render:", "clear_color", {color = data.hex2rgba("#1a1c2c")})
+	msg.post(current_scene, "load")
+	sound.play(current_music)
 end
 
 function on_message(self, message_id, message,sender)
-	if message_id == hash("show_game") then
-		msg.post("scenes#menu", "unload")
-		msg.post("scenes#game", "load")
-	elseif message_id == hash("show_menu") then
-		msg.post("scenes#game", "unload")
-		msg.post("scenes#menu", "load")
-	elseif message_id == hash("proxy_loaded") then
+	if message_id == SHOW_GAME then
+		gotoScene("scenes#game")
+		playMusic("music#inGame")
+	elseif message_id == SHOW_MENU then
+		gotoScene("scenes#menu")
+	elseif message_id == PROXY_LOADED then
 		msg.post(sender, "enable")
+	elseif message_id == GAME_OVER then
+		gotoScene("scenes#gameOver")
+		playMusic("music#interlude")
 	end
 end	
