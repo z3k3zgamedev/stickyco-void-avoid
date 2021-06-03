@@ -53,10 +53,10 @@ end
 
 function M.follow_position(self, dt)
 	local data_arr = self._data
-
+	
 	local new_pos = M.get_position(self)
-	self._last_pos.x = self._last_pos.x - .2
 	local diff_pos = self._last_pos - new_pos
+	diff_pos.x = -10
 	self._last_pos = new_pos
 
 	local prev_point, head_point = M.get_head_data_points(self)

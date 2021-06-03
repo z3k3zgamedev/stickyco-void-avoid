@@ -77,9 +77,7 @@ local function move(self)
 end
 
 local function move_up(self)
-	if state == CHANGE_GRAVITY then
-		return
-	end
+	if state == CHANGE_GRAVITY then return end
 	
 	if gravityDirection == GRAVITY_DOWN then
 		state = CHANGE_GRAVITY
@@ -91,9 +89,7 @@ local function move_up(self)
 end
 
 local function move_down(self)
-	if state == CHANGE_GRAVITY then	
-		return
-	end
+	if state == CHANGE_GRAVITY then	return end
 		
 	if gravityDirection == GRAVITY_UP then
 		state = CHANGE_GRAVITY
@@ -226,6 +222,7 @@ function init(self)
 	self.correction = vmath.vector3()
 	self.velocity = vmath.vector3(0, 0, 0)
 	self.to = vmath.vector3()
+	-- self.t = 0
 
 	-- local sprite_scale = vmath.vector3(.013)
 	-- go.set("#sprite", "scale", sprite_scale)
@@ -239,10 +236,9 @@ function final(self)
 end
 
 function update(self, dt)
-	-- if state == CHANGE_GRAVITY then
-	-- 	jumpLerp(self)
-	-- end
-
+	-- self.t = self.t + dt
+	-- go.set("#sphere", "time", vmath.vector4(self.t, 0, 0, 0))
+	
 	self.velocity.y = self.velocity.y + (GRAVITY * gravityDirection * dt)
 	
 	-- move player	
@@ -256,6 +252,8 @@ function update(self, dt)
 	self.correction = vmath.vector3()
 
 	move(self)
+
+	go.set_position(go.get_position(), go.get_id("player_trail"))
 end
 
 function on_message(self, message_id, message, sender)

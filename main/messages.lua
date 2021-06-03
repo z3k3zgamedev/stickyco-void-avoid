@@ -14,6 +14,7 @@ M.MODE_LANDSCAPE = hash("Landscape")
 M.MODE_PORTRAIT = hash("Portrait")
 M.WINDOW_RESIZED = hash("window_resized")
 M.UPDATE_WINDOW = hash("update_window")
+M.NEXT_LEVEL = hash("next_level")
 
 M.SHOW_GAME = hash("show_game")
 M.SHOW_MENU = hash("show_menu")

@@ -80,6 +80,10 @@ function M.next_level()
 		M.speed = M.speed + M.SPEED_INCREMENT
 	end
 	
+	return M.current_level()
+end
+
+function M.current_level()
 	return M.level
 end
 
@@ -89,29 +93,6 @@ end
 
 function M.set_state(state)
 	M.state = state
-end
-
-function M.world2tile(p)
-	return vmath.vector3(math.floor((p.x + M.TILE_SIZE) / M.TILE_SIZE), math.floor((p.y + M.TILE_SIZE) / M.TILE_SIZE), p.z)
-end
-
-function M.tile2world(p)
-	return vmath.vector3((p.x * M.TILE_SIZE) - (M.TILE_SIZE / 2), (p.y * M.TILE_SIZE) - (M.TILE_SIZE / 2), p.z)
-end
-
-function M.hex2rgba(hex)
-	hex = hex:gsub("#","")
-	local rgba = vmath.vector4(tonumber("0x"..hex:sub(1,2))/255, tonumber("0x"..hex:sub(3,4))/255, tonumber("0x"..hex:sub(5,6))/255, 1)
-	return rgba
-end
-
-function M.onscreen(p, m)
-	local x = p.x - M.scrollpos.x
-	if x > -m and x < 320 + m then
-		return true
-	else
-		return false
-	end
 end
 
 return M

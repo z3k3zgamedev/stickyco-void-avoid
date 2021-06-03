@@ -48,7 +48,7 @@ components {
     type: PROPERTY_TYPE_NUMBER
   }
   properties {
-    id: "tunnel_texture"
+    id: "tunnel_1"
     value: "/assets/textures/tunnel_blue.png"
     type: PROPERTY_TYPE_HASH
   }

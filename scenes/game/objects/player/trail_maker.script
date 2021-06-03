@@ -1,5 +1,6 @@
 
 local trail_maker = require("main.trail_maker")
+-- local trail_maker = require("hyper_trails.trail_maker")
 
 go.property("use_world_position", false)
 go.property("trail_width", 20)

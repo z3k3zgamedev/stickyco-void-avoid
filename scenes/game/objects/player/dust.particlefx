@@ -14,8 +14,8 @@ emitters {
     z: 0.70710677
     w: 0.70710677
   }
-  tile_source: "/builtins/graphics/particle_blob.tilesource"
-  animation: "anim"
+  tile_source: "/main/main.atlas"
+  animation: "orb"
   material: "/builtins/materials/particlefx.material"
   blend_mode: BLEND_MODE_ADD
   particle_orientation: PARTICLE_ORIENTATION_DEFAULT

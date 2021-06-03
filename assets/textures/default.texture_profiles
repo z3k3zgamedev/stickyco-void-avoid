@@ -6,6 +6,10 @@ path_settings {
   path: "**"
   profile: "Default"
 }
+path_settings {
+  path: "/hyper_trails/textures/data/"
+  profile: "Default"
+}
 profiles {
   name: "Default"
   platforms {

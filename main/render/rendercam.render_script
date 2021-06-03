@@ -19,6 +19,7 @@ function init(self)
 	self.text_pred = render.predicate({"text"})
 	self.model_pred = render.predicate({"model"})
 	self.particle_pred = render.predicate({"particle"})
+	self.trail_pred = render.predicate({"trail"})
 
 	self.clear_color = vmath.vector4(0)
 	self.clear_color.x = sys.get_config("render.clear_color_red", 0)
@@ -47,7 +48,7 @@ function update(self)
 	render.enable_state(render.STATE_DEPTH_TEST)
 	render.set_depth_mask(true)
 	render.draw(self.model_pred)
-	
+	render.draw(self.trail_pred)
 	-- Sprite and particle rendering
 	render.set_depth_mask(false)
 	render.disable_state(render.STATE_DEPTH_TEST)
@@ -55,7 +56,7 @@ function update(self)
 	render.enable_state(render.STATE_BLEND)
 	render.set_blend_func(render.BLEND_SRC_ALPHA, render.BLEND_ONE_MINUS_SRC_ALPHA)
 	render.disable_state(render.STATE_CULL_FACE)
-
+	
 	render.draw(self.tile_pred)
 	render.draw(self.particle_pred)
 	

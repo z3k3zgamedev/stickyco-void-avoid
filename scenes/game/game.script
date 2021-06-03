@@ -7,6 +7,7 @@ local GAME_OVER = messages.GAME_OVER
 local LAYOUT_CHANGED = messages.LAYOUT_CHANGED
 local MODE_LANDSCAPE = messages.MODE_LANDSCAPE
 local MODE_PORTRAIT = messages.MODE_PORTRAIT
+local NEXT_LEVEL = messages.NEXT_LEVEL
 
 local LANDSCAPE_ROTATION = vmath.quat()
 local PORTRAIT_ROTATION = vmath.quat_rotation_z(-math.pi * .5)
@@ -22,7 +23,9 @@ local function collectOrb(id, self)
 end
 
 local function next_level()
-	data.reset_level_duration()
+	msg.post("/background/tunnel#script", NEXT_LEVEL)
+	msg.post("/background/tunnel1#script", NEXT_LEVEL)
+	msg.post("/background/tunnel2#script", NEXT_LEVEL)
 	data.next_level()
 	current_level_duration = data.get_level_duration()
 end

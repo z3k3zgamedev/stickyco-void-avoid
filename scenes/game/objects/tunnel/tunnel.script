@@ -1,15 +1,37 @@
 local data = require "main.data"
+local messages = require "main.messages"
+
+local NEXT_LEVEL = messages.NEXT_LEVEL
+
+local ring_textures = nil
+local tunnel_textures = nil
 
 go.property("width", 1)
-go.property("ring_texture", resource.texture("/assets/textures/ring_blue.png"))
-go.property("tunnel_texture", resource.texture("/assets/textures/tunnel_blue.png"))
+
+go.property("ring_1", resource.texture("/assets/textures/ring_blue.png"))
+go.property("ring_2", resource.texture("/assets/textures/ring_pink.png"))
+go.property("ring_3", resource.texture("/assets/textures/ring_green.png"))
+go.property("ring_4", resource.texture("/assets/textures/ring_orange.png"))
+go.property("ring_5", resource.texture("/assets/textures/ring_white.png"))
+
+go.property("tunnel_1", resource.texture("/assets/textures/tunnel_blue.png"))
+go.property("tunnel_2", resource.texture("/assets/textures/tunnel_pink.png"))
+go.property("tunnel_3", resource.texture("/assets/textures/tunnel_green.png"))
+go.property("tunnel_4", resource.texture("/assets/textures/tunnel_orange.png"))
+go.property("tunnel_5", resource.texture("/assets/textures/tunnel_white.png"))
+
+local function next_level(self)
+	local level = data.current_level()
+	local ring = self.ring_textures[level]
+	local tunnel = self.tunnel_textures[level]
+	
+	go.set("#ring", "texture0", ring)
+	go.set("#tunnel", "texture0", tunnel)
+end
 
 function init(self)
-	local resource = resource.load("/assets/textures/ring_pink.texturec")
-	print(resource_path)
-	
-	go.set("#ring", "texture0", resource)
-	go.set("#tunnel", "texture0", self.tunnel_texture)
+	self.ring_textures = {self.ring_1, self.ring_2, self.ring_3, self.ring_4, self.ring_5}
+	self.tunnel_textures = {self.tunnel_1, self.tunnel_2, self.tunnel_3, self.tunnel_4, self.tunnel_5}
 end
 
 function update(self, dt)
@@ -22,5 +44,11 @@ function update(self, dt)
 	if position.x < -self.width * 1.5 then
 		position.x = position.x + (self.width*3)
 		go.set_position(position)
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == NEXT_LEVEL then
+		next_level(self)
 	end
 end
