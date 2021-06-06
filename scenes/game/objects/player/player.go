@@ -1,5 +1,5 @@
 components {
-  id: "player"
+  id: "script"
   component: "/scenes/game/objects/player/player.script"
   position {
     x: 0.0
@@ -16,21 +16,6 @@ components {
 components {
   id: "dust"
   component: "/scenes/game/objects/player/dust.particlefx"
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-}
-components {
-  id: "sphere"
-  component: "/assets/models/sphere.model"
   position {
     x: 0.0
     y: 0.0
@@ -110,6 +95,68 @@ embedded_components {
   type: "factory"
   data: "prototype: \"/scenes/game/objects/player/explosion.go\"\n"
   "load_dynamically: false\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
+  id: "player"
+  type: "model"
+  data: "mesh: \"/builtins/assets/meshes/sphere.dae\"\n"
+  "material: \"/assets/materials/player.material\"\n"
+  "skeleton: \"\"\n"
+  "animations: \"\"\n"
+  "default_animation: \"\"\n"
+  "name: \"unnamed\"\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
+  id: "glow"
+  type: "sprite"
+  data: "tile_set: \"/main/main.atlas\"\n"
+  "default_animation: \"player_glow\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "blend_mode: BLEND_MODE_ADD\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
+  id: "orb_glow"
+  type: "sprite"
+  data: "tile_set: \"/main/main.atlas\"\n"
+  "default_animation: \"player_glow\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "blend_mode: BLEND_MODE_ADD\n"
   ""
   position {
     x: 0.0

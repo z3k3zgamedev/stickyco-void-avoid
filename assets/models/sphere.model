@@ -1,5 +1,5 @@
 mesh: "/builtins/assets/meshes/sphere.dae"
-material: "/assets/materials/player.material"
+material: "/builtins/materials/model.material"
 textures: "/assets/textures/ring_white.png"
 skeleton: ""
 animations: ""

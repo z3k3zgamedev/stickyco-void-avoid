@@ -21,7 +21,7 @@ void main()
     vec2 res = vec2(1.0, 1.0);
     vec2 uv = var_texcoord0/res.xy;
     float widthHeightRatio = res.x/res.y;
-    vec2 centre = vec2(.5, .5);
+    vec2 centre = vec2(.2, .5);
     vec2 pos = centre - uv;
     pos.y /= widthHeightRatio;
     // pos.y += 0.03;

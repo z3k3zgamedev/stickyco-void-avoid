@@ -67,11 +67,11 @@ emitters {
     key: EMITTER_KEY_PARTICLE_LIFE_TIME
     points {
       x: 0.0
-      y: 2.0
+      y: 3.5
       t_x: 1.0
       t_y: 0.0
     }
-    spread: 0.1
+    spread: 0.5
   }
   properties {
     key: EMITTER_KEY_PARTICLE_SPEED

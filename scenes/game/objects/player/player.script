@@ -163,6 +163,9 @@ end
 local function collect_orb(id)
 	sound.play("main:/sounds#collect")
 	msg.post("/scripts#game", COLLECT_ORB, { id = id })
+	
+	go.set("#orb_glow", "tint.w", 1)
+	go.animate("#orb_glow", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, .2)
 end
 
 local function show_gameOver(self)
@@ -224,8 +227,11 @@ function init(self)
 	self.to = vmath.vector3()
 	-- self.t = 0
 
-	-- local sprite_scale = vmath.vector3(.013)
-	-- go.set("#sprite", "scale", sprite_scale)
+	local sprite_scale = vmath.vector3(.012)
+	go.set("#glow", "scale", sprite_scale)
+
+	go.set("#orb_glow", "scale", sprite_scale)
+	go.set("#orb_glow", "tint.w", 0)
 
 	-- self.emitter = init_explosion(self)
 	particlefx.play("#dust")

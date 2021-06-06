@@ -1,6 +1,6 @@
 components {
-  id: "moveObjects"
-  component: "/scenes/game/objects/moveObjects.script"
+  id: "script"
+  component: "/scenes/game/objects/orb/orb.script"
   position {
     x: 0.0
     y: 0.0
@@ -17,7 +17,7 @@ embedded_components {
   id: "orb"
   type: "model"
   data: "mesh: \"/builtins/assets/meshes/sphere.dae\"\n"
-  "material: \"/builtins/materials/model.material\"\n"
+  "material: \"/assets/materials/orb.material\"\n"
   "textures: \"/assets/textures/ring_white.png\"\n"
   "skeleton: \"\"\n"
   "animations: \"\"\n"
@@ -68,6 +68,26 @@ embedded_components {
   "linear_damping: 0.0\n"
   "angular_damping: 0.0\n"
   "locked_rotation: true\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
+  id: "glow"
+  type: "sprite"
+  data: "tile_set: \"/main/main.atlas\"\n"
+  "default_animation: \"orb\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "blend_mode: BLEND_MODE_ADD\n"
   ""
   position {
     x: 0.0
