@@ -1,6 +1,5 @@
 local data = require "main.data"
 local messages = require "main.messages"
-local acidrain = require "particles.acidrain"
 
 local COLLECT_ORB = messages.COLLECT_ORB
 local GAME_OVER = messages.GAME_OVER
@@ -183,38 +182,6 @@ local function die(self)
 	timer.delay(1.5, true, show_gameOver)
 end
 
-local function init_explosion(self)	
-	local emitter = acidrain.create({
-		factory = {
-			url = "#explosionFactory",
-			sprite_id = "particle",
-		},
-		emitter = {
-			update_method = "physics",
-			type = "point",
-			width = 320,
-			height = 1,
-			max_particles = 1000
-		},
-		particle = {
-			color = {vmath.vector3(1, 1, 1)},
-			emit_delay = 0.025,
-			time_in = 0.25,
-			time_life = 2,
-			time_out = 0.25,
-			scale_in = vmath.vector3(0.25, 0.25, 0.25),
-		},
-		movement = {
-			type = "angle",
-			angle = {{250, 290}},
-			velocity = {180},
-			angle_increment = 4,
-			angle_bounce = true,
-		}
-	})
-	return emitter
-end
-
 -- built in functions
 
 function init(self)
@@ -233,7 +200,6 @@ function init(self)
 	go.set("#orb_glow", "scale", sprite_scale)
 	go.set("#orb_glow", "tint.w", 0)
 
-	-- self.emitter = init_explosion(self)
 	particlefx.play("#dust")
 end
 
