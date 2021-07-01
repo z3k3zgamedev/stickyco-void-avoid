@@ -26,9 +26,6 @@ function init(self)
 	end
 	
 	gui.set_enabled(feedback, false)
-
-	local btn_exit = gui.get_node("btn_exit")
-	local btn_retry = gui.get_node("btn_retry")
 	
 	update_score(self)
 end
@@ -47,6 +44,9 @@ function on_input(self, action_id, action)
 		if gui.pick_node(btn_exit, action.x, action.y) then
 			if action.pressed then
 				msg.post("main:/scenes", SHOW_MENU)
+			-- 	gui.play_flipbook(btn_exit, hash("button_circle_down"))
+			-- elseif action.released then
+			-- 	gui.play_flipbook(btn_exit, hash("button_circle"))
 			end			
 		end
 

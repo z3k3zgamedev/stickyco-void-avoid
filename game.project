@@ -52,7 +52,6 @@ type = 3D
 debug = 0
 
 [html5]
-splash_image = /assets/images/sticky_logo.png
 htmlfile = /builtins/manifests/web/engine_template.html
 cssfile = /builtins/manifests/web/dark_theme.css
 show_fullscreen_button = 0
