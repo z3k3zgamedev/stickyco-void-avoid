@@ -94,6 +94,14 @@ images {
   image: "/assets/images/black_dot.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
+images {
+  image: "/assets/images/btn_audio_off.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/assets/images/btn_audio_on.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
 margin: 5
 extrude_borders: 0
 inner_padding: 0
