@@ -54,7 +54,7 @@ debug = 0
 [html5]
 splash_image = /assets/images/sticky_logo.png
 htmlfile = /builtins/manifests/web/engine_template.html
-cssfile = /web/dark_theme.css
+cssfile = /builtins/manifests/web/dark_theme.css
 show_fullscreen_button = 0
 show_made_with_defold = 0
 scale_mode = stretch

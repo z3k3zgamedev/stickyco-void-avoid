@@ -94,6 +94,22 @@ images {
   image: "/assets/images/black_dot.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
+images {
+  image: "/assets/images/label_go.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/assets/images/label-game.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/assets/images/label-over.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/assets/images/label_ready.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
 margin: 5
 extrude_borders: 0
 inner_padding: 0

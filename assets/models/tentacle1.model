@@ -1,0 +1,6 @@
+mesh: "/assets/models/tenticle1.dae"
+material: "/builtins/materials/model.material"
+skeleton: "/assets/models/tenticle1.dae"
+animations: "/assets/models/tenticle1.dae"
+default_animation: "tenticle1"
+name: "unnamed"

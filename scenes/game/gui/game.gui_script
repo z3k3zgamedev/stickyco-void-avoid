@@ -17,18 +17,21 @@ local UNREGISTER = messages.UNREGISTER
 
 local btn_gravity
 local btn_jump
-local countdown_counter = 5
-local countdown_status = {"GO!","1","2","3", "Ready"}
+local countdown_counter = 4
+-- local countdown_status = {"label_go","label_ready","label_ready", "label_ready"}
 
 local function countdown(self, handle, time_elapsed)
-	local text_status = gui.get_node("text_status")
+	local label_ready = gui.get_node("label_ready")
+	local label_go = gui.get_node("label_go")
+	
 	countdown_counter = countdown_counter - 1
 
-	if countdown_counter > 0 then
-		gui.set_text(text_status, countdown_status[countdown_counter])
-	else
+	if countdown_counter == 1 then
+		gui.set_enabled(label_ready, false)
+		gui.set_enabled(label_go, true)
+	elseif countdown_counter == 0 then
 		data.set_state(data.STATE_PLAY)
-		gui.set_enabled(text_status, false)
+		gui.set_enabled(label_go, false)
 		timer.cancel(handle)
 	end
 end
@@ -69,6 +72,9 @@ end
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
+
+	local label_go = gui.get_node("label_go")
+	gui.set_enabled(label_go, false)
 
 	timer.delay(1, true, countdown)
 		

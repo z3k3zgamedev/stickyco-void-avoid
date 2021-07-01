@@ -9,8 +9,8 @@ uniform lowp sampler2D tex0;
 uniform lowp vec4 tint;
 uniform lowp vec4 time;
 
-float intensity = 5;
-float radius = 1;
+float intensity = 5.0;
+float radius = 1.0;
 
 float getGlow(float dist, float radius, float intensity){
     return pow(radius/dist, intensity);
